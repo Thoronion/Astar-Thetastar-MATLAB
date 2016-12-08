@@ -16,7 +16,7 @@ function [path, distance] =  Astar(grid, start, goal, varargin)
 %   |  3  |  6  |  9  |
 %   -------------------
 %
-%   In order two convert cartesian coordinates use MATLAB'S function
+%   In order to convert cartesian coordinates use MATLAB'S function
 %   sub2ind.
 %   [path, distance] = Astar(grid, start, goal) returns the path between 
 %   tile 'start' and 'goal' in 'grid' and returns the distance of the path. 
