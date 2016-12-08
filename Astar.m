@@ -1,24 +1,36 @@
 function [path, distance] =  Astar(grid, start, goal, varargin)
 %Astar calculates a path and its distance between two nodes in a grid graph
-%   path = Astar(grid, start, goal), calculates a path between tile start 
-%   and tile goal in grid. All 8 neighbours of every tile is considered
-%   connected. grid must be a real matrix where every element represent the
-%   cost of moving there. The heuristic used is the diagonal norm.
-%     
+%   path = Astar(grid, start, goal), calculates a path between tile 'start' 
+%   and tile 'goal' in 'grid'. All 8 neighbours of every tile is considered
+%   connected. 'grid' must be a real matrix where every element represent the
+%   cost of moving there. The heuristic used is the diagonal distance.
+%   
+%   A grid has nodes with indices in column major order.
+%   For example, tiles in a 3 x 3 size grid has the following indicies. 
 %
-%  A grid has nodes with indices in column major order.
-%  For example, tiles in a 3 x 3 size grid has the following indicies. 
+%   -------------------
+%   |  1  |  4  |  7  |
+%   -------------------
+%   |  2  |  5  |  8  |
+%   -------------------
+%   |  3  |  6  |  9  |
+%   -------------------
 %
-%  -------------------
-%  |  1  |  4  |  7  |
-%  -------------------
-%  |  2  |  5  |  8  |
-%  -------------------
-%  |  3  |  6  |  9  |
-%  -------------------
+%   In order two convert cartesian coordinates use MATLABS built-in function
+%   sub2ind.
+%   [path, distance] = Astar(grid, start, goal) returns the path between 
+%   tile 'start' and 'goal' in 'grid' and returns the distance of the path. 
 %
-%  In order two convert cartesian coordinates use MATLABS built-in function
-%  sub2ind.
+%   [path, distance] = Astar(grid, start, goal, 'heuristic', VALUE) can
+%   be used to choose another heuristic. Implemented heuristics are
+%   
+%   'manhattan'     The manhattan distance is used. (This is default for 4 connected neighbours).
+%   'diagonal'      The diagonal distance is used (This is default for 8 connected neighbours).
+%   'euclidean'     The euclidean distance is used.
+%   'djikstra'      No heuristic is used and the Astar becomes the djikstra algorithm.
+%   
+%
+
 
 [heuristic_function, connectedNeighbours, cost] = parse_inputs(grid, start, goal, varargin{:});
 
