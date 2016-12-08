@@ -16,7 +16,7 @@ function [path, distance] =  Astar(grid, start, goal, varargin)
 %   |  3  |  6  |  9  |
 %   -------------------
 %
-%   In order two convert cartesian coordinates use MATLABS built-in function
+%   In order two convert cartesian coordinates use MATLAB'S function
 %   sub2ind.
 %   [path, distance] = Astar(grid, start, goal) returns the path between 
 %   tile 'start' and 'goal' in 'grid' and returns the distance of the path. 
@@ -29,7 +29,10 @@ function [path, distance] =  Astar(grid, start, goal, varargin)
 %   'euclidean'     The euclidean distance is used.
 %   'djikstra'      No heuristic is used and the Astar becomes the djikstra algorithm.
 %   
-%
+%   [path, distance] = Astar(grid, start, goal, 'cost', C) can be used
+%   to modify the cost of moving one tile. C must be a two-dimensional vector 
+%   where C(1) is the cost of horizontal and vertical movement and C(2)
+%   is the cost of diagonal movement.
 
 
 [heuristic_function, connectedNeighbours, cost] = parse_inputs(grid, start, goal, varargin{:});
@@ -149,7 +152,7 @@ elseif strcmp(heuristic, 'manhattan')
 elseif strcmp(heuristic, 'euclidean')
     heuristic_func = @euclidean_heuristic;
 elseif strcmp(heuristic, 'djikstra')
-    heuristic_func = @(current, goal, grid) 0;
+    heuristic_func = @(current, goal, grid, cost) 0;
 else
     error('Invalid heuristic option.')
 end
