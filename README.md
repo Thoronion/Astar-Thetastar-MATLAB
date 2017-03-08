@@ -1,2 +1,2 @@
-# Astar-MATLAB
-An implementation of Astar in MATLAB
+# Astar/Thetastar-MATLAB
+An implementation of Astar and Thetastar in MATLAB
